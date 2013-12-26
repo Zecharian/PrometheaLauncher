@@ -48,14 +48,15 @@ public class DownloadUtils extends Thread {
 	 * @throws NoSuchAlgorithmException - see md5
 	 */
 	public static String getCreeperhostLink(String file) throws NoSuchAlgorithmException {
-		String resolved = (downloadServers.containsKey(Settings.getSettings().getDownloadServer())) ? "http://" + downloadServers.get(Settings.getSettings().getDownloadServer()) : "http://new.creeperrepo.net";
-		resolved += "/FTB2/" + file;
+		String resolved = (downloadServers.containsKey(Settings.getSettings().getDownloadServer())) ? "http://" + downloadServers.get(Settings.getSettings().getDownloadServer()) : "http://launcher.promethea-ftb.com";
+		resolved += "/Promethea/" + file;
+		Logger.logWarn("In getCreeperhostLink :" + resolved);
 		HttpURLConnection connection = null;
 		try {
 			connection = (HttpURLConnection) new URL(resolved).openConnection();
 			for(String server : downloadServers.values()) {
 				if(connection.getResponseCode() != 200) {
-					resolved = "http://" + server + "/FTB2/" + file;
+					resolved = "http://" + server + "/Promethea/" + file;
 					connection = (HttpURLConnection) new URL(resolved).openConnection();
 				} else {
 					break;
@@ -71,15 +72,16 @@ public class DownloadUtils extends Thread {
 	 * @return - the direct link
 	 */
 	public static String getStaticCreeperhostLink(String file) {
-		String resolved = (downloadServers.containsKey(Settings.getSettings().getDownloadServer())) ? "http://" + downloadServers.get(Settings.getSettings().getDownloadServer()) : "http://new.creeperrepo.net";
-		resolved += "/FTB2/static/" + file;
+		String resolved = (downloadServers.containsKey(Settings.getSettings().getDownloadServer())) ? "http://" + downloadServers.get(Settings.getSettings().getDownloadServer()) : "http://launcher.promethea-ftb.com";
+		resolved += "/static/Promethea/" + file;
+		Logger.logWarn("In getStaticCreeperhostLink :" + resolved);
 		HttpURLConnection connection = null;
 		try {
 			connection = (HttpURLConnection) new URL(resolved).openConnection();
 			if(connection.getResponseCode() != 200) {
 				for(String server : downloadServers.values()) {
 					if(connection.getResponseCode() != 200) {
-						resolved = "http://" + server + "/FTB2/static/" + file;
+						resolved = "http://" + server + "/Promethea/static/" + file;
 						connection = (HttpURLConnection) new URL(resolved).openConnection();
 					} else {
 						break;
@@ -110,7 +112,7 @@ public class DownloadUtils extends Thread {
 	 */
 	public static boolean fileExists(String file) {
 		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(new URL("http://new.creeperrepo.net/FTB2/" + file).openStream()));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new URL("http://launcher.promethea-ftb.com/Promethea/" + file).openStream()));
 			return !reader.readLine().toLowerCase().contains("not found");
 		} catch (Exception e) {
 			return false;
@@ -164,8 +166,8 @@ public class DownloadUtils extends Thread {
 		Logger.logInfo("Issue with new md5 method, attempting to use backup method.");
 		String content = null;
 		Scanner scanner = null;
-		String resolved = (downloadServers.containsKey(Settings.getSettings().getDownloadServer())) ? "http://" + downloadServers.get(Settings.getSettings().getDownloadServer()) : "http://new.creeperrepo.net";
-		resolved += "/md5/FTB2/" + url;
+		String resolved = (downloadServers.containsKey(Settings.getSettings().getDownloadServer())) ? "http://" + downloadServers.get(Settings.getSettings().getDownloadServer()) : "http://launcher.promethea-ftb.com";
+		resolved += "/md5/Promethea/" + url;
 		HttpURLConnection connection = null;
 		try {
 			connection = (HttpURLConnection) new URL(resolved).openConnection();
@@ -177,7 +179,7 @@ public class DownloadUtils extends Thread {
 			}
 			if(response != 200 || (content == null || content.isEmpty())) {
 				for(String server : backupServers.values()) {
-					resolved = "http://" + server + "/md5/FTB2/" + url.replace("/", "%5E");
+					resolved = "http://" + server + "/md5/Promethea/" + url.replace("/", "%5E");
 					connection = (HttpURLConnection) new URL(resolved).openConnection();
 					response = connection.getResponseCode();
 					if(response == 200) {
@@ -245,11 +247,11 @@ public class DownloadUtils extends Thread {
 	 */
 	@Override
 	public void run() {
-		downloadServers.put("Automatic", "new.creeperrepo.net");
+		downloadServers.put("Automatic", "launcher.promethea-ftb.com");
 		BufferedReader in = null;
 		// New Servers
 		try {
-			in = new BufferedReader(new InputStreamReader(new URL("http://new.creeperrepo.net/edges.json").openStream()));
+			in = new BufferedReader(new InputStreamReader(new URL("http://launcher.promethea-ftb.com/edges.json").openStream()));
 			String line;
 			while((line = in.readLine()) != null) { // Hacky JSON parsing because this will all be gone soon (TM)
 				line = line.replace("{", "").replace("}", "").replace("\"", "");
@@ -274,7 +276,7 @@ public class DownloadUtils extends Thread {
 		
 		// Backup md5 servers
 		try {
-			in = new BufferedReader(new InputStreamReader(new URL("http://www.creeperrepo.net/mirrors").openStream()));
+			in = new BufferedReader(new InputStreamReader(new URL("http://launcher.promethea-ftb.com/mirrors").openStream()));
 			String line;
 			while((line = in.readLine()) != null) {
 				String[] splitString = line.split(",");
