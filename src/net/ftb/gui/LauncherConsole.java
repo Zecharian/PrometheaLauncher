@@ -54,7 +54,7 @@ import net.ftb.tools.PastebinPoster;
 
 @SuppressWarnings("serial")
 public class LauncherConsole extends JFrame implements ILogListener {
-	private final static String launcherLogFile = "FTBLauncherLog.txt";
+	private final static String launcherLogFile = "PrometheaLauncherLog.txt";
 	private final static String minecraftLogFile = "MinecraftLog.txt";
 	private final JEditorPane displayArea;
 	private final HTMLEditorKit kit;

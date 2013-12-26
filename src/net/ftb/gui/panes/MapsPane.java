@@ -318,7 +318,7 @@ public class MapsPane extends JPanel implements ILauncherPane, MapListener {
 	}
 
 	private static boolean originCheck(Map map) {
-		return (origin.equalsIgnoreCase(I18N.getLocaleString("MAIN_ALL"))) || (origin.equalsIgnoreCase("ftb") && map.getAuthor().equalsIgnoreCase("the ftb team")) || (origin.equalsIgnoreCase(I18N.getLocaleString("FILTER_3THPARTY")) && !map.getAuthor().equalsIgnoreCase("the ftb team"));
+		return (origin.equalsIgnoreCase(I18N.getLocaleString("MAIN_ALL"))) || (origin.equalsIgnoreCase("promethea") && map.getAuthor().equalsIgnoreCase("the promethea team")) || (origin.equalsIgnoreCase(I18N.getLocaleString("FILTER_3THPARTY")) && !map.getAuthor().equalsIgnoreCase("the promethea team"));
 	}
 
 	private static boolean compatibilityCheck(Map map) {

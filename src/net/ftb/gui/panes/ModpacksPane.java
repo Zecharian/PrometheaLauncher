@@ -413,7 +413,7 @@ public class ModpacksPane extends JPanel implements ILauncherPane, ModPackListen
 	}
 
 	private static boolean originCheck(ModPack pack) {
-		return (origin.equalsIgnoreCase(I18N.getLocaleString("MAIN_ALL"))) || (origin.equalsIgnoreCase("ftb") && pack.getAuthor().equalsIgnoreCase("the ftb team")) || (origin.equalsIgnoreCase(I18N.getLocaleString("FILTER_3THPARTY")) && !pack.getAuthor().equalsIgnoreCase("the ftb team"));
+		return (origin.equalsIgnoreCase(I18N.getLocaleString("MAIN_ALL"))) || (origin.equalsIgnoreCase("promethea") && pack.getAuthor().equalsIgnoreCase("the promethea team")) || (origin.equalsIgnoreCase(I18N.getLocaleString("FILTER_3THPARTY")) && !pack.getAuthor().equalsIgnoreCase("the promethea team"));
 	}
 
 	private static boolean textSearch(ModPack pack) {

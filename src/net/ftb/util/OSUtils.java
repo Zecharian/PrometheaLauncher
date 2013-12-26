@@ -58,7 +58,7 @@ public class OSUtils {
 			Logger.logError(e.getMessage(), e);
 		}
 		Logger.logWarn("Failed to get path for current directory - falling back to user's home directory.");
-		return System.getProperty("user.dir") + "//FTB Pack Install";
+		return System.getProperty("user.dir") + "//Promethea Pack Install";
 	}
 
 	/**
@@ -68,11 +68,11 @@ public class OSUtils {
 	public static String getDynamicStorageLocation() {
 		switch(getCurrentOS()) {
 		case WINDOWS:
-			return System.getenv("APPDATA") + "/ftblauncher/";
+			return System.getenv("APPDATA") + "/promethealauncher/";
 		case MACOSX:
-			return cachedUserHome + "/Library/Application Support/ftblauncher/";
+			return cachedUserHome + "/Library/Application Support/promethealauncher/";
 		case UNIX:
-			return cachedUserHome + "/.ftblauncher/";
+			return cachedUserHome + "/.promethealauncher/";
 		default:
 			return getDefInstallPath() + "/temp/";
 		}
