@@ -56,7 +56,6 @@ import net.ftb.locale.I18N.Locale;
 import net.ftb.log.Logger;
 import net.ftb.util.DownloadUtils;
 import net.ftb.util.OSUtils;
-import net.ftb.util.TrackerUtils;
 
 @SuppressWarnings("serial")
 public class ModpacksPane extends JPanel implements ILauncherPane, ModPackListener {
@@ -209,7 +208,6 @@ public class ModpacksPane extends JPanel implements ILauncherPane, ModPackListen
 								} else {
 									OSUtils.browse(DownloadUtils.getCreeperhostLink("modpacks%5E" + ModPack.getSelectedPack().getDir() + "%5E" + version + "%5E" + ModPack.getSelectedPack().getServerUrl()));
 								}
-								TrackerUtils.sendPageView(ModPack.getSelectedPack().getName() + " Server Download", ModPack.getSelectedPack().getName());
 							}
 						} catch (NoSuchAlgorithmException e) { }
 					}

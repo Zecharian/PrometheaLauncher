@@ -50,7 +50,6 @@ import net.ftb.util.DownloadUtils;
 import net.ftb.util.ErrorUtils;
 import net.ftb.util.FileUtils;
 import net.ftb.util.OSUtils;
-import net.ftb.util.TrackerUtils;
 
 @SuppressWarnings("serial")
 public class ModManager extends JDialog {
@@ -158,7 +157,6 @@ public class ModManager extends JDialog {
 			String debugTag = "debug: downloadModPack: ";
 
 			Logger.logInfo("Downloading Mod Pack");
-			TrackerUtils.sendPageView("net/ftb/tools/ModManager.java", "Downloaded: " + modPackName + " v." + curVersion.replace('_', '.'));
 			String dynamicLoc = OSUtils.getDynamicStorageLocation();
 			String installPath = Settings.getSettings().getInstallPath();
 			ModPack pack = ModPack.getSelectedPack();

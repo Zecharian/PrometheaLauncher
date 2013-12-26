@@ -44,7 +44,6 @@ import net.ftb.log.Logger;
 import net.ftb.util.DownloadUtils;
 import net.ftb.util.FileUtils;
 import net.ftb.util.OSUtils;
-import net.ftb.util.TrackerUtils;
 
 @SuppressWarnings("serial")
 public class MapManager extends JDialog {
@@ -131,7 +130,6 @@ public class MapManager extends JDialog {
 			new File(installPath, map.getSelectedCompatible() + "/minecraft/saves/" + dir).mkdirs();
 			FileUtils.copyFolder(new File(tempPath, "Maps/" + dir + "/" + dir), new File(installPath, map.getSelectedCompatible() + "/minecraft/saves/" + dir));
 			FileUtils.copyFile(new File(tempPath, "Maps/" + dir + "/" + "version"), new File(installPath, map.getSelectedCompatible() + "/minecraft/saves/" + dir + "/version"));
-			TrackerUtils.sendPageView(map.getName() + " Install", map.getName());
 		}
 	}
 

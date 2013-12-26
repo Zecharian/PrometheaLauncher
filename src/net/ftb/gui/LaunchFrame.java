@@ -110,9 +110,6 @@ import net.ftb.tools.MinecraftVersionDetector;
 import net.ftb.tools.ModManager;
 import net.ftb.tools.ProcessMonitor;
 import net.ftb.tools.TextureManager;
-import net.ftb.tracking.AnalyticsConfigData;
-import net.ftb.tracking.JGoogleAnalyticsTracker;
-import net.ftb.tracking.JGoogleAnalyticsTracker.GoogleAnalyticsVersion;
 import net.ftb.updater.UpdateChecker;
 import net.ftb.util.DownloadUtils;
 import net.ftb.util.ErrorUtils;
@@ -120,7 +117,6 @@ import net.ftb.util.FileUtils;
 import net.ftb.util.OSUtils;
 import net.ftb.util.OSUtils.OS;
 import net.ftb.util.StyleUtil;
-import net.ftb.util.TrackerUtils;
 import net.ftb.workers.GameUpdateWorker;
 import net.ftb.workers.LoginWorker;
 
@@ -154,7 +150,6 @@ public class LaunchFrame extends JFrame {
 	public static LauncherConsole con;
 	public static String tempPass = "";
 	public static Panes currentPane = Panes.MODPACK;
-	public static JGoogleAnalyticsTracker tracker = new JGoogleAnalyticsTracker(new AnalyticsConfigData("UA-37330489-2"), GoogleAnalyticsVersion.V_4_7_2);
 
 	public static final String FORGENAME = "MinecraftForge.zip";
 
@@ -171,8 +166,6 @@ public class LaunchFrame extends JFrame {
 	 * @param args - CLI arguments
 	 */
 	public static void main(String[] args) {
-		tracker.setEnabled(true);
-		TrackerUtils.sendPageView("net/ftb/gui/LaunchFrame.java", "Launcher Start v" + version);
 
 		if(new File(Settings.getSettings().getInstallPath(), "FTBLauncherLog.txt").exists()) {
 			new File(Settings.getSettings().getInstallPath(), "FTBLauncherLog.txt").delete();
@@ -256,11 +249,9 @@ public class LaunchFrame extends JFrame {
 						
 						osw.flush();
 						
-						TrackerUtils.sendPageView("net/ftb/gui/LaunchFrame.java", "Unique User (Credits)");
 					}
 					
 					if(!Settings.getSettings().getLoaded() && !Settings.getSettings().getSnooper()) {
-						TrackerUtils.sendPageView("net/ftb/gui/LaunchFrame.java", "Unique User (Settings)");
 						Settings.getSettings().setLoaded(true);
 					}
 					
@@ -422,7 +413,6 @@ public class LaunchFrame extends JFrame {
 							} else {
 								OSUtils.browse(DownloadUtils.getCreeperhostLink("modpacks/" + ModPack.getSelectedPack().getDir() + "/" + version + "/" + ModPack.getSelectedPack().getServerUrl()));
 							}
-							TrackerUtils.sendPageView(ModPack.getSelectedPack().getName() + " Server Download", ModPack.getSelectedPack().getName());
 						} catch (NoSuchAlgorithmException e) { }
 					}
 				}
@@ -1091,7 +1081,6 @@ public class LaunchFrame extends JFrame {
 		try {
 			Process minecraftProcess = MinecraftLauncher.launchMinecraft(workingDir, username, password, FORGENAME, Settings.getSettings().getRamMax(), maxPermSize);
 			StreamLogger.start(minecraftProcess.getInputStream(), new LogEntry().level(LogLevel.UNKNOWN));
-			TrackerUtils.sendPageView(ModPack.getSelectedPack().getName() + " Launched", ModPack.getSelectedPack().getName());
 			try {
 				Thread.sleep(1500);
 			} catch (InterruptedException e) { }
@@ -1211,7 +1200,6 @@ public class LaunchFrame extends JFrame {
                     pack.getMcVersion());
             
             StreamLogger.start(minecraftProcess.getInputStream(), new LogEntry().level(LogLevel.UNKNOWN));
-            TrackerUtils.sendPageView(ModPack.getSelectedPack().getName() + " Launched", ModPack.getSelectedPack().getName());
             try {
                 Thread.sleep(1500);
             } catch (InterruptedException e) { }
